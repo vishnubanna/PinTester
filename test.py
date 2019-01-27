@@ -1,14 +1,19 @@
-raised = raw_input("numbers and a letter")
-test = raised.split(',')
-for i in range(0, len(test)):
-  try:
-    test[i] = int(test[i])
-  except:
-    test[i] = test[i]
+import wiringpi2 as wp
+from time import sleep
+
+wp.wiringPiSetupGpio()
+wp.pinMode(17, 1)
+input = raw_input("run")
+if input == "run":
+  run = True
+  while (run):
+    try:
+      wp.digitalwrite(17, 1)
+      sleep(2)
+      wp.digitalwrite(17, 0)
+    except KeyboardInterrupt:
+      run = False
 
 
-print(test)
 
-for i in range(0, len(test)):
-  if type(test[i]) == int:
-    print (test[i])
+

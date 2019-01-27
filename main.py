@@ -5,16 +5,16 @@ from time import*
 import sched
 
 def rise(pinsol, pinresis):
-    wp.digitalwire(pinsol, 0)
-    wp.digitalwire(pinresis, 1)
+    wp.digitalwrite(pinsol, 0)
+    wp.digitalwrite(pinresis, 1)
     sleep(1)
-    wp.digitalwire(pinsol, 1)
-    wp.digitalwire(pinresis, 0)
+    wp.digitalwrite(pinsol, 1)
+    wp.digitalwrite(pinresis, 0)
 
 def lower(pinsol, pinresis, length):
     sleep(length)
-    wp.digitalwire(pinsol, 0)
-    wp.digitalwire(pinresis, 1)
+    wp.digitalwrite(pinsol, 0)
+    wp.digitalwrite(pinresis, 1)
 
 #def auto():
 
