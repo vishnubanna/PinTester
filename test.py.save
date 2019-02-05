@@ -1,0 +1,20 @@
+import wiringpi2 as wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()
+wiringpi.pinMode(11, 1)
+input = raw_input("run")
+if input == "run":
+  run = True
+  while (run):
+    try:
+      wiringpi.digitalWrite(11, 1)
+      sleep(10)
+      wiringpi.digitalWrite(11, 0)
+      sleep(10)
+    #except KeyboardInterrupt:
+     # run = False
+
+
+
+
