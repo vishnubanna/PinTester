@@ -4,17 +4,18 @@ import numpy
 from time import*
 import sched
 
-def rise(pinsol, pinresis):
-    wp.digitalwrite(pinsol, 0)
-    wp.digitalwrite(pinresis, 1)
-    sleep(1)
-    wp.digitalwrite(pinsol, 1)
-    wp.digitalwrite(pinresis, 0)
+def rise(pinsol):
+    wp.digitalWrite(pinsol, 0)
+    #wp.digitalWrite(pinresis, 1)
+    sleep(0.5)
+    wp.digitalWrite(pinsol, 1)
 
-def lower(pinsol, pinresis, length):
+    #wp.digitalWrite(pinresis, 0)
+
+def lower(pinsol, length):
     sleep(length)
-    wp.digitalwrite(pinsol, 0)
-    wp.digitalwrite(pinresis, 1)
+    wp.digitalWrite(pinsol, 0)
+    #wp.digitalWrite(pinresis, 1)
 
 #def auto():
 
@@ -34,11 +35,13 @@ wp.pinMode(solonoid[1], 1)
 wp.pinMode(solonoid[2], 1)
 wp.pinMode(solonoid[3], 1)
 wp.pinMode(solonoid[4], 1)
+'''
 wp.pinMode(resis[0], 1)
 wp.pinMode(resis[1], 1)
 wp.pinMode(resis[2], 1)
 wp.pinMode(resis[3], 1)
 wp.pinMode(resis[4], 1)
+'''
 
 
 
@@ -71,14 +74,18 @@ elif choice == "a":
     print("working on it")
     length = raw_input("how long do you want each solonoid to be raised?")
     a = True
-    try:
-        while(a):
+    while(a):
+        try:
             for i in range(len(solonoid)):
-                rise(solonoid[i-1], resis[i-1])
-            sleep(length)
+                rise(solonoid[i-1])
+            sleep(1)
             for i in range(len(solonoid)):
-                lower(solonoid[i-1], resis[i-1], 0)
-    except KeyboardInterrupt:
+                lower(solonoid[i-1], resis[i-1], 1)
+        except KeyboardInterrupt:
+            print("end")
+            for i in range(len(solonoid)):
+                lower(solonoid[i-1], 0.5)
+
 
 
 
