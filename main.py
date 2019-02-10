@@ -1,10 +1,6 @@
-import wiringpi2 as wp
-import math
-import numpy
-from time import*
 import test
-import sched
 
+'''
 def rise(pinsol):
     wp.digitalWrite(pinsol, 0)
     #wp.digitalWrite(pinresis, 1)
@@ -18,14 +14,9 @@ def lower(pinsol, length):
     wp.digitalWrite(pinsol, 0)
     #wp.digitalWrite(pinresis, 1)
 
-#def auto():
-
-
-
-
 
 solonoid = [17,27,22,5,6]
-#resis = [0,5,6,13,19]
+resis = [0,5,6,13,19]
 prompt1 = "which solonoids do you want to test? enter: a number between 1 and 5, enter off to lower all"
 TIME_LIMIT = 10 #seconds
 
@@ -36,7 +27,7 @@ wp.pinMode(solonoid[1], 1)
 wp.pinMode(solonoid[2], 1)
 wp.pinMode(solonoid[3], 1)
 wp.pinMode(solonoid[4], 1)
-'''
+
 wp.pinMode(resis[0], 1)
 wp.pinMode(resis[1], 1)
 wp.pinMode(resis[2], 1)
@@ -49,6 +40,7 @@ wp.pinMode(resis[4], 1)
 
 choice = raw_input("would you like to control the device manually or would you like it to be automatic, m = manual a = automatic")
 # inset condition to turn all pins off after l0 seconds
+'''
 if choice == "m":
     m  = True
     on = []
@@ -69,9 +61,9 @@ if choice == "m":
                 for j in range (0, len(solonoid)):
                     lower(solonoid[j], resis[j], length)
                 m = False
+'''
 
-
-elif choice == "a":
+if choice == "a":
     test.automatic()
 
 
