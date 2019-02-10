@@ -2,6 +2,7 @@ import wiringpi2 as wp
 import math
 import numpy
 from time import*
+import test
 import sched
 
 def rise(pinsol):
@@ -23,7 +24,7 @@ def lower(pinsol, length):
 
 
 
-solonoid = [17,27,22,10,9]
+solonoid = [17,27,22,5,6]
 #resis = [0,5,6,13,19]
 prompt1 = "which solonoids do you want to test? enter: a number between 1 and 5, enter off to lower all"
 TIME_LIMIT = 10 #seconds
@@ -71,20 +72,7 @@ if choice == "m":
 
 
 elif choice == "a":
-    print("working on it")
-    length = raw_input("how long do you want each solonoid to be raised?")
-    a = True
-    while(a):
-        try:
-            for i in range(len(solonoid)):
-                rise(solonoid[i-1])
-            sleep(1)
-            for i in range(len(solonoid)):
-                lower(solonoid[i-1], resis[i-1], 1)
-        except KeyboardInterrupt:
-            print("end")
-            for i in range(len(solonoid)):
-                lower(solonoid[i-1], 0.5)
+    test.automatic()
 
 
 
