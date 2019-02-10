@@ -24,7 +24,7 @@ def lower(pinsol, length):
 
 
 solonoid = [17,27,22,10,9]
-resis = [0,5,6,13,19]
+#resis = [0,5,6,13,19]
 prompt1 = "which solonoids do you want to test? enter: a number between 1 and 5, enter off to lower all"
 TIME_LIMIT = 10 #seconds
 
