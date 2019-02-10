@@ -29,16 +29,32 @@ def manual():
         except:
             print ("not a solonoid")
             choice = "invalid"
-        for i in range(len(solonoid)):
+        for i in range(0,len(solonoid)):
             if choice == solonoid[i] :
                 print("solonoid {} is raised".format(getChar(key)))
                 wp.digitalWrite(solonoid[i], 1)
-            elif :
-                print("{0} pressed".format(key))
+        else:
+            print("invalid: {}".format(choice))
         pass
 
     def on_release(key):
+        choice = getChar(key)
+        try:
+            choice = int(choice)
+        except:
+            print ("not a solonoid")
+            choice = "invalid"
+        for i in range(0,len(solonoid)):
+            if choice == solonoid[i]:
+                print("solonoid {} is raised".format(getChar(key)))
+                wp.digitalWrite(solonoid[i], 0)
+
         if key == Key.esc:
+            wp.digitalWrite(solonoid[0], 0)
+            wp.digitalWrite(solonoid[1], 0)
+            wp.digitalWrite(solonoid[2], 0)
+            wp.digitalWrite(solonoid[3], 0)
+            wp.digitalWrite(solonoid[4], 0)
             return False
         pass
 

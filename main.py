@@ -1,4 +1,6 @@
 import test
+import manual
+
 
 '''
 def rise(pinsol):
@@ -62,9 +64,14 @@ if choice == "m":
                     lower(solonoid[j], resis[j], length)
                 m = False
 '''
+try:
+    if choice == "a":
+        test.automatic()
+    elif choice == "m":
+        manual.manual()
+except KeyboardInterrupt:
+    print("test ended")
 
-if choice == "a":
-    test.automatic()
 
 
 
