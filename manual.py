@@ -1,8 +1,10 @@
 import wiringpi2 as wp
 from pynput import keyboard
 from pynput.keyboard import Key, Listener, KeyCode
+import time
 
 pk = keyboard
+TIME_INIT = time.clock()
 solonoid = [17,27,22,5,6]
 
 wp.wiringPiSetupGpio()
@@ -12,9 +14,19 @@ wp.pinMode(solonoid[2], 1)
 wp.pinMode(solonoid[3], 1)
 wp.pinMode(solonoid[4], 1)
 
-
-
 def manual():
+
+    '''
+    def PermLower(solonoid):
+        on = True
+        while(on):
+            tim = 0
+            tim = time.clock() - TIME_INIT
+            if (time.clock() - TIME_INIT > 9):
+                print("limit reached, all pins lowered")
+                on = False
+    '''
+
     def getChar(key):
         if (key, KeyCode):
             try:
@@ -30,11 +42,14 @@ def manual():
             print ("not a solonoid")
             choice = "invalid"
         for i in range(0,len(solonoid)):
-            if choice == solonoid[i] :
-                print("solonoid {} is raised".format(getChar(key)))
-                wp.digitalWrite(solonoid[i], 1)
+            try:
+                if solonoid[choice-1] == solonoid[i] :
+                    print("solonoid {} is raised".format(getChar(key)))
+                    wp.digitalWrite(solonoid[i], 1)
+            except:
+                print("non existents solonoid, only choice from 1 - 5 please")
         else:
-            print("invalid: {}".format(choice))
+            print(f"invalid: {choice}")
         pass
 
     def on_release(key):
@@ -45,9 +60,11 @@ def manual():
             print ("not a solonoid")
             choice = "invalid"
         for i in range(0,len(solonoid)):
-            if choice == solonoid[i]:
-                print("solonoid {} is raised".format(getChar(key)))
-                wp.digitalWrite(solonoid[i], 0)
+            try:
+                if solonoid[choice-1] == solonoid[i]:
+                    print(f"solonoid {getChar(key)} is raised")
+                    wp.digitalWrite(solonoid[i], 0)
+            except:
 
         if key == Key.esc:
             wp.digitalWrite(solonoid[0], 0)
@@ -60,4 +77,3 @@ def manual():
 
     with Listener (on_press = on_press, on_release = on_release) as listener:
         listener.join()
-
