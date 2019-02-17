@@ -36,11 +36,11 @@ def manual():
             print("exiting")
             return False
         pin = int(pin)
-        if (count < 5 and count != 0) and (pin >= 1 and pin <= 5):
+        if (pin >= 1 and pin <= 5):
             if rised[pin-1] == pin:
                 count -= 1
                 lower(pin-1, pin-1)
-                rised.insert(pin-1, 0)
+                rised[pin-1] = 0
                 print(rised)
                 print("pin {} lowered".format(pin))
                 return "lowered"
@@ -48,13 +48,12 @@ def manual():
                 rise(pin-1, pin-1)
                 q.put(pin)
                 count += 1
-                rised.insert(pin-1, pin)
+                rised[pin-1] = pin
                 print(rised)
                 print("pin {} has been raised".format(pin))
                 return "rised"
 
-        elif count >= 5:
-            print("all pins rised")
+        else:
             pass
     except KeyboardInterrupt:
         print("manual off")
@@ -63,20 +62,20 @@ def manual():
 def rise(sol, res):
     global TIME_INIT
     wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.002)
+    time.sleep(0.00001)
     wp.digitalWrite(resis[res], 1)
-    time.sleep(0.002)
+    time.sleep(0.00001)
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.002)
+    time.sleep(0.00002)
     wp.digitalWrite(resis[res], 0)
     return
 
 def lower(sol, res):
     wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.002)
+    time.sleep(0.00002)
     wp.digitalWrite(resis[res], 0)
-    time.sleep(0.002)
+    time.sleep(0.00002)
     wp.digitalWrite(solonoid[sol], 0)
     time.sleep(0.002)
     wp.digitalWrite(resis[res], 1)
@@ -84,18 +83,19 @@ def lower(sol, res):
 
 def timer(tim,pin):
     global q
+    global rise
     on = True
     while on:
         global solonoid, resis
-        if (time.clock() - tim) > 8:
-            #lower(pin-1, pin-1)
-            wp.digitalWrite(solonoid[pin - 1], 0)
-            time.sleep(0.002)
-            wp.digitalWrite(resis[pin - 1], 1)
-            with pin_lock:
+        if (time.clock() - tim) > 5:
+            #with pin_lock:
+                wp.digitalWrite(solonoid[pin - 1], 0)
+                time.sleep(0.00002)
+                wp.digitalWrite(resis[pin - 1], 1)
                 print ("\n pin {} is off".format(pin))
                 print (time.clock() - tim)
-                on = False
+                on = False 
+                #rise[pin-1] = 0
 
 def main():
     on = True
@@ -108,11 +108,15 @@ def main():
             q.put(3)
             q.put(4)
             q.put(5)
+            rise(0,0)
+            rise(1,1)
+            rise(2,2)
+            rise(3,3)
+            rise(4,4)
             while q.has_values():
                 q.lister()
                 pin = q.get()
-                rise(pin - 1, pin - 1)
-                t1 = threading.Thread(target= timer, args=(TIME_INIT, pin))
+                t1 = threading.Thread(target= timer, args=(time.clock(), pin))
                 t1.daemon = True
                 t1.start()
                 test.append(t1)
