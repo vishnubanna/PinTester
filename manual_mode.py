@@ -135,15 +135,14 @@ def main():
             elif valid == "lowered":
                 print("pin lowered")
             elif valid == False:
-                print("ending")
-                for thread in threads:
-                    if thread.isAlive():
-                        print(thread)
-                        thread.join()
                 on = False
-                return
             else:
                 print("all pins raised")
+        print("ending")
+        for thread in threads:
+            if thread.isAlive():
+                print(thread)
+                thread.join()
     except KeyboardInterrupt:
         on = False
         return
