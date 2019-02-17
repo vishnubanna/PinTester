@@ -36,7 +36,7 @@ def manual():
             print("exiting")
             return False
         pin = int(pin)
-        if (count < 5 and count != 0) and (pin >= 1 and pin <= 5):
+        if (pin >= 1 and pin <= 5):
             if rised[pin-1] == pin:
                 count -= 1
                 lower(pin-1, pin-1)
@@ -53,8 +53,7 @@ def manual():
                 print("pin {} has been raised".format(pin))
                 return "rised"
 
-        elif count >= 5:
-            print("all pins rised")
+        else:
             pass
     except KeyboardInterrupt:
         print("manual off")
