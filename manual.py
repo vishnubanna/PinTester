@@ -49,7 +49,7 @@ def manual():
             except:
                 print("non existents solonoid, only choice from 1 - 5 please")
         else:
-            print(f"invalid: {choice}")
+            print("invalid: {}".format(choice))
         pass
 
     def on_release(key):

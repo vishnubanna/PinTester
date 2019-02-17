@@ -7,10 +7,8 @@ q = Que()
 threads = []
 print_lock = threading.Lock()
 
-
 def timer(tim,pin):
     global q
-    q.lister()
     on = True
     while on:
         if (time.clock() - tim) > 8:
@@ -19,37 +17,70 @@ def timer(tim,pin):
                 print (time.clock() - tim)
                 on = False
 
-def threader():
-    on = True
-    while on:
-        global q
-        pin = q.get()
-        timeinit = time.clock()
-        timer(timeinit, pin)
-        on = q.tasks_done()
-
 def control(pins):
-    cont = raw_input("type a letter")
-    if pins:
+    cont = input("type a letter")
+    try:
+        cont = int(cont)
+    except:
+        cont = cont
+    if type(cont) == int:
         print ("pin {} is on".format(cont))
+        q.put(cont)
         return cont
     else:
-        print ("pin {} is on".format(cont))
         return False
 
 if __name__ == "__main__":
-    x = raw_input('Y/n')
+    x = input('y/n')
     pins = True if (x == 'y') else False
-    q.put(control(pins))
-    while pins:
-        pin = control(pins)
-        if type(pin) == bool:
-            pins == False
-        q.put(pin)
-        t = threading.Thread(target=timer, args=(time.clock(), q.get()))
-        t.daemon = True
-        t.start()
-        #print("thread start")
-        #print (threads)
-
-
+    if pins:
+        try:
+            test = []
+            q.put(1)
+            q.put(2)
+            q.put(3)
+            q.put(4)
+            q.put(5)
+            while q.has_values():
+                q.lister()
+                a = q.get()
+                #rise(pin - 1, pin - 1)
+                t1 = threading.Thread(target= timer, args=(time.clock(), a))
+                t1.daemon = True
+                t1.start()
+                test.append(t1)
+            for thread in test:
+                thread.join()
+        except:
+            print("error")
+    try:
+        while pins:
+            pin = control(pins)
+            if type(pin) != bool:
+                q.lister()
+                t = threading.Thread(target=timer, args=(time.clock(), q.get()))
+                t.daemon = True
+                t.start()
+                threads.append(t)
+            else:
+                print("ending")
+                #print(threads)
+                for thread in threads:
+                    if thread.isAlive():
+                        print(thread)
+                        thread.join()
+                q.put(1)
+                q.put(2)
+                q.put(3)
+                while q.has_values():
+                    print(q.has_values())
+                    q.lister()
+                    t = threading.Thread(target=timer, args=(time.clock(), q.get()))
+                    t.start()
+                    threads.append(t)
+                print("done")
+                for thread in threads:
+                    thread.join()
+                pins = False
+    except KeyboardInterrupt:
+        print("done")
