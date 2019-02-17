@@ -88,10 +88,10 @@ def timer(tim,pin):
     while on:
         global solonoid, resis
         if (time.clock() - tim) > 8:
-            lower(solonoid[pin - 1], resis[pin - 1])
-            # wp.digitalWrite(solonoid[pin - 1], 0)
-            # time.sleep(0.002)
-            # wp.digitalWrite(resis[pin - 1], 1)
+            #lower(pin-1, pin-1)
+            wp.digitalWrite(solonoid[pin - 1], 0)
+            time.sleep(0.002)
+            wp.digitalWrite(resis[pin - 1], 1)
             with pin_lock:
                 print ("\n pin {} is off".format(pin))
                 print (time.clock() - tim)
