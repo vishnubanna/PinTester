@@ -51,7 +51,7 @@ def manual():
                 rised[pin-1] = pin
                 print(rised)
                 print("pin {} has been raised".format(pin))
-                return "rised"
+                return pin
 
         else:
             pass
@@ -77,7 +77,7 @@ def lower(sol, res):
     wp.digitalWrite(resis[res], 0)
     time.sleep(0.00002)
     wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.002)
+    time.sleep(0.00002)
     wp.digitalWrite(resis[res], 1)
     return
 
@@ -110,14 +110,10 @@ def main():
             q.put(3)
             q.put(4)
             q.put(5)
-            rise(0,0)
-            rise(1,1)
-            rise(2,2)
-            rise(3,3)
-            rise(4,4)
             while q.has_values():
                 q.lister()
                 pin = q.get()
+                rise(pin - 1, pin - 1)
                 t1 = threading.Thread(target= timer, args=(time.clock(), pin))
                 t1.daemon = True
                 t1.start()
@@ -129,7 +125,8 @@ def main():
     try:
         while on:
             valid = manual()
-            if valid == "rised":
+            if valid != "lowered":
+                q.put(valid)
                 t = threading.Thread(target= timer, args=(TIME_INIT, q.get()))
                 t.daemon = True
                 t.start()
