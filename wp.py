@@ -8,5 +8,5 @@ def pinMode(pin, mode):
     #print("pin {} set to {}".format(pin, mode))
 
 def digitalWrite(pin, nf):
-    sleep(0.5)
+    sleep(0.02)
     print("pin {} set to {}".format(pin, nf))

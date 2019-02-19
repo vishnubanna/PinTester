@@ -33,11 +33,11 @@ def manual():
     try:
         global rised
         global count
-        pin = raw_input("which pin raised or lowered?")
+        pin = input("which pin raised or lowered?")
         try:
             pin = int(pin)
         except:
-            pin = raw_input("which pin raised or lowered?")
+            pin =input("which pin raised or lowered?")
         if (count <= 5) and (pin >= 1 and pin <= 5):
             if rised[pin-1] == pin:
                 count -= 1
@@ -91,12 +91,11 @@ def timer(tim, pin, length):
     global rise
     on = True
     time.sleep(length)
-    if (time.clock() - tim) > length:
-            if rised[pin-1] == pin:
-                with pin_lock:
-                    lower(pin-1, pin-1)
-                print(time.clock() - tim)
-                print("time force pin {} lowered".format(pin))
+    if rised[pin-1] == pin:
+        with pin_lock:
+            lower(pin-1, pin-1)
+        print(time.clock() - tim)
+        print("time force pin {} lowered".format(pin))
 
 
 
@@ -133,7 +132,7 @@ def main():
             if type(valid) == int:
                 q.put(valid)
                 q.lister()
-                t = threading.Thread(target= timer, args=(TIME_INIT, q.get(), 5))
+                t = threading.Thread(target= timer, args=(TIME_INIT, q.get(), 10))
                 t.daemon = True
                 t.start()
                 threads.append(t)
