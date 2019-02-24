@@ -1,7 +1,7 @@
 import time
 import threading
-#import wiringpi2 as wp
-import wp
+import wiringpi2 as wp
+#import wp
 from Que import Que
 
 TIME_INIT = time.clock()
@@ -65,38 +65,23 @@ def manual():
 
 def rise(sol, res):
     global TIME_INIT
-    wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.00001)
-    wp.digitalWrite(resis[res], 1)
-    time.sleep(0.00001)
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 0)
-    time.sleep(0.0002)
-    wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.00002)
-    wp.digitalWrite(resis[res], 0)
-    time.sleep(0.00002)
+    time.sleep(0.02)
     wp.digitalWrite(solonoid[sol], 0)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 1)
     return
 
 def lower(sol, res):
-    wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.00001)
-    wp.digitalWrite(resis[res], 1)
-    time.sleep(0.00001)
+    global TIME_INIT
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 0)
-    time.sleep(0.0002)
-    wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.00002)
-    wp.digitalWrite(resis[res], 0)
-    time.sleep(0.00002)
+    time.sleep(0.02)
     wp.digitalWrite(solonoid[sol], 0)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 1)
@@ -119,6 +104,7 @@ def main():
     on = True
     print("maunual mode - initial start up test")
     global rised
+    '''
     if on:
         try:
             rised = [1,2,3,4,5]
@@ -146,6 +132,7 @@ def main():
 
         except:
             print("error")
+    '''
     try:
         while on:
             valid = manual()
