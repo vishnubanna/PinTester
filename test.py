@@ -1,5 +1,5 @@
-#import wiringpi2 as wiringpi
-import wp as wiringpi
+import wiringpi2 as wiringpi
+#import wp as wiringpi
 from time import sleep
 
 def automatic():
