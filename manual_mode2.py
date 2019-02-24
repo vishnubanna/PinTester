@@ -89,13 +89,12 @@ def lower(sol, res):
 def timer(tim, pin, length):
     global q
     global rise
-    on = True
     time.sleep(length)
-    if rised[pin-1] == pin:
+    if (rised[pin-1] == pin) and ((time.clock() - tim) >= length):
         with pin_lock:
             lower(pin-1, pin-1)
         print(time.clock() - tim)
-        print("time force pin {} lowered".format(pin))
+        print("time force pin {} lowered press {}".format(pin, pin))
 
 
 
