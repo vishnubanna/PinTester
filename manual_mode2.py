@@ -104,6 +104,7 @@ def main():
     global rised
     if on:
         try:
+            rised = [1,2,3,4,5]
             test = []
             q.put(1)
             q.put(2)
@@ -112,6 +113,7 @@ def main():
             q.put(5)
             q.lister()
             time.sleep(1)
+            time.sleep(4)
             while q.has_values():
                 q.lister()
                 pin = q.get()
@@ -121,8 +123,10 @@ def main():
                 t1.start()
                 test.append(t1)
             for thread in test:
+                print(thread)
                 thread.join()
             rised = [0]*len(solonoid)
+
         except:
             print("error")
     try:
@@ -146,6 +150,7 @@ def main():
             if thread.isAlive():
                 print(thread)
                 thread.join()
+        return
     except KeyboardInterrupt:
         on = False
 
