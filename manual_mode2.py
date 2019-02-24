@@ -1,7 +1,7 @@
 import time
 import threading
-#import wiringpi2 as wp
-import wp
+import wiringpi2 as wp
+#import wp
 from Que import Que
 
 TIME_INIT = time.clock()
@@ -117,7 +117,7 @@ def main():
                 q.lister()
                 pin = q.get()
                 rise(pin - 1, pin - 1)
-                t1 = threading.Thread(target= timer, args=(time.clock(), pin, 1))
+                t1 = threading.Thread(target= timer, args=(time.clock(), pin, 2))
                 t1.daemon = True
                 t1.start()
                 test.append(t1)
@@ -151,5 +151,5 @@ def main():
         on = False
 
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+    #main()
