@@ -28,8 +28,8 @@ def automatic():
   camera.framerate = 20
   rawCapture = PiRGBArray(camera, size = (width,length))
 
-  startCase = np.empty((width,length,3), dtype = np.uint8)
-  endCase = np.empty((width,length,3), dtype = np.uint8)
+  startCase = np.empty((width,length,3), dtype = np.uint32)
+  endCase = np.empty((width,length,3), dtype = np.uint32)
   delta = np.empty((width,length,1), dtype = np.uint8)
   time.sleep(0.1)
   roi1 = []

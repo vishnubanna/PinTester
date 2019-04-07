@@ -9,6 +9,9 @@ camera = PiCamera()
 camera.resolution = (res[0], res[1])
 camera.framerate = 15
 rawCapture = PiRGBArray(camera, size = (res[0], res[1]))
+startCase = np.empty((width,length,3), dtype = np.uint32)
+endCase = np.empty((width,length,3), dtype = np.uint32)
+delta = np.empty((width,length,1), dtype = np.uint32)
 
 last_frame = []
 sleep(0.1)
@@ -16,6 +19,12 @@ sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
     image = frame.array
     #pic = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    try:
+        delta = cv2.subtract(image, endcase)
+    except:
+        delta = cv2.subtract(image, image)
+
 
     cv2.imshow("current_state", image)
     key = cv2.waitKey(1) & 0xFF
