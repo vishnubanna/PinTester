@@ -27,7 +27,7 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
         print('error')
 
 
-    cv2.imshow("current_state", image)
+    cv2.imshow("current_state", delta)
     endCase = image
     key = cv2.waitKey(1) & 0xFF
 
