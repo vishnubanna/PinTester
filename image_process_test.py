@@ -9,9 +9,9 @@ camera = PiCamera()
 camera.resolution = (res[0], res[1])
 camera.framerate = 15
 rawCapture = PiRGBArray(camera, size = (res[0], res[1]))
-startCase = np.empty((width,length,3), dtype = np.uint32)
-endCase = np.empty((width,length,3), dtype = np.uint32)
-delta = np.empty((width,length,1), dtype = np.uint32)
+startCase = np.empty((res[0],res[1],3), dtype = np.uint32)
+endCase = np.empty((res[0],res[1],3), dtype = np.uint32)
+delta = np.empty((res[0],res[1],1), dtype = np.uint32)
 
 last_frame = []
 sleep(0.1)
