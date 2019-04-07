@@ -2,8 +2,9 @@ import test
 from os import popen
 import manual_mode2
 
-choice = raw_input("would you like to use automatic or manual mode?")
-while True:
+on = True
+while on:
+    choice = raw_input("would you like to use automatic or manual mode?")
     try:
         if choice == "a":
             test.automatic()
@@ -12,10 +13,5 @@ while True:
         else:
             choice = raw_input("would you like to use automatic or manual mode?")
     except KeyboardInterrupt:
-        print("test ended")
-
-
-
-
-
-
+        print("end")
+        on = False

@@ -2,6 +2,11 @@ import wiringpi2 as wiringpi
 #import wp as wiringpi
 from time import sleep
 import picamera
+import cv2
+import numpy as np
+import time
+import pycamera.array
+from picamera import PiCamera
 
 def automatic():
   wiringpi.wiringPiSetupGpio()
@@ -10,66 +15,72 @@ def automatic():
   wiringpi.pinMode(22, 1)
   wiringpi.pinMode(5, 1)
   wiringpi.pinMode(6, 1)
+
+  timeLen = 0.004
+
   input = raw_input("run y/n")
 
   if input == "y":
-    run = True
+    run = 0
     wiringpi.digitalWrite(17, 0)
     wiringpi.digitalWrite(27, 0)
     wiringpi.digitalWrite(22, 0)
     wiringpi.digitalWrite(5, 0)
     wiringpi.digitalWrite(6, 0)
-    while (run):
+    print("running 10000 cycles on all pins")
+    while (run < 10000):
       try:
         wiringpi.digitalWrite(17, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(27, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(22, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(5, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(6, 1)
         print("HIGH")
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(17, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(27, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(22, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(5, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(6, 0)
         print("LOW")
         sleep(2)
         wiringpi.digitalWrite(17, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(27, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(22, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(5, 1)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(6, 1)
         print("HIGH")
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(17, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(27, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(22, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(5, 0)
-        sleep(0.004)
+        sleep(timeLen)
         wiringpi.digitalWrite(6, 0)
         print("LOW")
+        sleep(timeLen)
       except KeyboardInterrupt:
-        run = False
+        run = 10000
         wiringpi.digitalWrite(17, 0)
         wiringpi.digitalWrite(27, 0)
         wiringpi.digitalWrite(22, 0)
         wiringpi.digitalWrite(5, 0)
         wiringpi.digitalWrite(6, 0)
         sleep(1)
-        print("end")
+        print("User ended premature")
+        return

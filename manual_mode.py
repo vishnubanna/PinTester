@@ -1,10 +1,14 @@
-
-
 import time
 import threading
-#import wiringpi2 as wp
-import wp
+import multiprocessing
+import wiringpi2 as wp
+#import wp
 from Que import Que
+import cv2
+import numpy as np
+import pycamera.array
+from picamera import PiCamera
+import os
 
 TIME_INIT = time.clock()
 count = 0
@@ -14,6 +18,27 @@ solonoid = [17,27,22,5,6]
 resis = [20,24,12,16,20]
 rised = [0]*len(solonoid)
 threads = []
+
+width = 640
+length = 480
+cycles = 1000
+region = width/5
+lenreg = length/4
+
+camera = PiCamera()
+camera.resolution = (width,length)
+camera.imgrate = 20
+rawCapture = PiRGBArray(camera, size = (width,length))
+
+startCase = np.empty((width,length,3), dtype = np.uint8)
+endCase = np.empty((width,length,3), dtype = np.uint8)
+delta = np.empty((width,length,1), dtype = np.uint8)
+time.sleep(0.1)
+roi1 = []
+roi2 = []
+roi3 = []
+roi4 = []
+roi5 = []
 
 # controll the rasing and lowering of the pins with an actual button make 5 pins input pins( and read the input) as long as input is on or voltage is on the pins will be raised
 
@@ -42,7 +67,7 @@ def manual():
             pin =input("which pin raised or lowered?")
         if (count <= 5) and (pin >= 1 and pin <= 5):
             if rised[pin-1] == pin:
-                c -= 1
+                count -= 1
                 lower(pin-1, pin-1)
                 rised[pin-1] = 0
                 print(rised)
@@ -67,42 +92,49 @@ def manual():
 
 def rise(sol, res):
     global TIME_INIT
-    wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.00001)
-    wp.digitalWrite(resis[res], 1)
-    time.sleep(0.00001)
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 0)
-    return
-
-def lower(sol, res):
-    wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.00002)
-    wp.digitalWrite(resis[res], 0)
-    time.sleep(0.00002)
+    time.sleep(0.02)
     wp.digitalWrite(solonoid[sol], 0)
     time.sleep(0.00002)
     wp.digitalWrite(resis[res], 1)
     return
 
+def lower(sol, res):
+    global TIME_INIT
+    TIME_INIT = time.clock()
+    wp.digitalWrite(solonoid[sol], 1)
+    time.sleep(0.00002)
+    wp.digitalWrite(resis[res], 0)
+    time.sleep(0.02)
+    wp.digitalWrite(solonoid[sol], 0)
+    time.sleep(0.00002)
+    wp.digitalWrite(resis[res], 1)
+    return
+
+
 def timer(tim, pin, length):
     global q
     global rise
-    on = True
     time.sleep(length)
-    if rised[pin-1] == pin:
+    if (rised[pin-1] == pin) and ((time.clock() - tim) >= length):
         with pin_lock:
             lower(pin-1, pin-1)
         print(time.clock() - tim)
-        print("time force pin {} lowered".format(pin))
+        print("time force pin {} lowered press {}".format(pin, pin))
 
-def main():  on = True
+
+
+def main():
+    on = True
     print("maunual mode - initial start up test")
     global rised
+    '''
     if on:
         try:
+            rised = [1,2,3,4,5]
             test = []
             q.put(1)
             q.put(2)
@@ -111,19 +143,23 @@ def main():  on = True
             q.put(5)
             q.lister()
             time.sleep(1)
+            time.sleep(4)
             while q.has_values():
                 q.lister()
                 pin = q.get()
                 rise(pin - 1, pin - 1)
-                t1 = threading.Thread(target= timer, args=(time.clock(), pin, 1))
+                t1 = threading.Thread(target= timer, args=(time.clock(), pin, 2))
                 t1.daemon = True
                 t1.start()
                 test.append(t1)
             for thread in test:
+                print(thread)
                 thread.join()
             rised = [0]*len(solonoid)
+
         except:
             print("error")
+    '''
     try:
         while on:
             valid = manual()
@@ -145,10 +181,10 @@ def main():  on = True
             if thread.isAlive():
                 print(thread)
                 thread.join()
+        return
     except KeyboardInterrupt:
         on = False
 
 
-if __name__ == "__main__":
-    main()
-
+#if __name__ == "__main__":
+    #main()

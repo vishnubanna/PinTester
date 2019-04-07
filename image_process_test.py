@@ -5,9 +5,9 @@ import cv2 as cv
 
 res = (640, 480)
 camera = PiCamera()
-camera.resolution = (res[1], res[2])
+camera.resolution = (res[0], res[1])
 camera.framerate(15)
-rawCapture = PiRGBArray(camera, size = (res[1], res[2]))
+rawCapture = PiRGBArray(camera, size = (res[0], res[1]))
 
 last_frame = []
 sleep(0.1)
