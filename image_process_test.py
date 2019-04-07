@@ -18,7 +18,7 @@ sleep(0.1)
 
 for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
     image = frame.array
-    #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     try:
         delta = cv2.subtract(endCase, image)
