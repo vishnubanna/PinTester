@@ -25,7 +25,7 @@ def automatic():
 
   camera = PiCamera()
   camera.resolution = (width,length)
-  camera.imgrate = 20
+  camera.framerate = 20
   rawCapture = PiRGBArray(camera, size = (width,length))
 
   startCase = np.empty((width,length,3), dtype = np.uint8)

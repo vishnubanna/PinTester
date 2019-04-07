@@ -2,6 +2,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from time import*
 import cv2 as cv
+import numpy as np
 
 res = (640, 480)
 camera = PiCamera()
@@ -13,7 +14,7 @@ last_frame = []
 sleep(0.1)
 
 for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
-    image = frame.PiRGBArray
+    image = np.asarray(frame)
 
     cv.imshow("current_state", image)
     key = cv2.waitKey(q) & 0xFF
