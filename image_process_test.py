@@ -23,7 +23,8 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
     try:
         delta = cv2.subtract(image, endcase)
     except:
-        delta = cv2.subtract(image, image)
+        delta = endCase
+        print('error')
 
 
     cv2.imshow("current_state", image)
