@@ -27,6 +27,7 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
 
 
     cv2.imshow("current_state", image)
+    endcase = image
     key = cv2.waitKey(1) & 0xFF
 
     rawCapture.truncate(0)
