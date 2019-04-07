@@ -10,7 +10,7 @@ camera.resolution = (res[0], res[1])
 camera.framerate = 15
 rawCapture = PiRGBArray(camera, size = (res[0], res[1]))
 startCase = np.empty((res[0],res[1],3), dtype = np.uint32)
-endCase = np.empty((res[0],res[1],3), dtype = np.uint32)
+endCase = np.empty((res[0],res[1],1), dtype = np.uint32)
 delta = np.empty((res[0],res[1],1), dtype = np.uint32)
 
 last_frame = []
@@ -21,9 +21,9 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     try:
-        delta = cv2.subtract(image, endCase)
+        delta = cv2.subtract(endCase, image)
     except:
-        delta = endCase
+        delta = delta
         print('error')
 
 
