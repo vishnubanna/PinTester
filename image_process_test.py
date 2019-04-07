@@ -17,7 +17,7 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
     image = np.asarray(frame)
     #pic = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    cv2.imshow("current_state", frame)
+    cv2.imshow("current_state", image)
     key = cv2.waitKey(q) & 0xFF
 
     rawCapture.truncate(0)
