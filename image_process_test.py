@@ -26,6 +26,11 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
         delta = delta
         print('error')
 
+    art = np.asarray(delta)
+    total = 0
+    avg = np.average(art)
+    if (avg > 0.5):
+        print(avg, "motion detected")
 
     cv2.imshow("current_state", delta)
     endCase = image
