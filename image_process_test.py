@@ -1,7 +1,7 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from time import*
-import cv22
+import cv2
 import numpy as np
 
 res = (640, 480)
