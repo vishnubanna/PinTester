@@ -52,7 +52,7 @@ if input == "y":
   print("running {} cycles on all pins".format(cycles))
 
 
-with camera as PiCamera():
+with PiCamera() as camera:
     camera.resolution = (width,length)
     camera.framerate = 20
     rawCapture = PiRGBArray(camera, size = (width,length))
