@@ -151,7 +151,7 @@ with PiCamera() as camera:
             run = run + 1
 
         except KeyboardInterrupt:
-            run = cylces
+            run = cycles
             wiringpi.digitalWrite(17, 0)
             wiringpi.digitalWrite(27, 0)
             wiringpi.digitalWrite(22, 0)
