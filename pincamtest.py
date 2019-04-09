@@ -100,11 +100,14 @@ with PiCamera() as camera:
                     rawCapture1.truncate(0)
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
+            print("fine")
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
+            print("fine")
 
             delta = cv2.subtract(startCase, endCase)
 
             delta = np.asarray(delta)
+            print("im here")
 
             roi1 = delta[0:(region), 2*lenreg:(3*lenreg)]
             roi2 = delta[(region):(2*region), 2*lenreg:(3*lenreg)]
@@ -124,7 +127,7 @@ with PiCamera() as camera:
             failCounter = pinfail(4, r4avg, failCounter, cycles)
             failCounter = pinfail(5, r5avg, failCounter, cycles)
 
-            if failCounter > 5:
+            if failCounter > 10:
                 runs = cycles
                 print("failure ended premature")
                 wiringpi.digitalWrite(17, 0)
