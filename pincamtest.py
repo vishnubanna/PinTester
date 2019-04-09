@@ -81,7 +81,7 @@ while (run < cycles):
             print("i am recording {}".format(i))
 
 
-        camera.stop_recording('test.mp4')
+        camera.stop_recording('test.h264')
         sleep(1)
         for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
             endCase = frame.array
