@@ -74,16 +74,16 @@ with PiCamera() as camera:
     while (run < cycles):
         try:
             with rawCapture as output:
-                startCase = camera.capture(output, 'rgb')
-                startCase = startCase.array
+                camera.capture(output, 'rgb')
+                startCase = output.array
 
             for i in range(0, 5):
                 sleep(1)
                 print("i am recording {}".format(i))
 
             with rawCapture as output:
-                endCase = camera.capture(output, 'rgb')
-                endCase = endCase.array
+                camera.capture(output, 'rgb')
+                endCase = output.array
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
