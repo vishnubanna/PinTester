@@ -69,20 +69,20 @@ if input == "y":
 
 while (run < cycles):
     try:
-        with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
-                #pcam.capture(startCase, 'rgb')
+        with frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+                #camera.capture(startCase, 'rgb')
             startCase = frame.array
         sleep(1)
-        pcam.start_recording('test.mp4')
+        camera.start_recording('test.mp4')
 
         for i in range(0, 5):
             sleep(1)
             print("i am recording {}".format(i))
 
 
-        pcam.stop_recording('test.mp4')
+        camera.stop_recording('test.mp4')
         sleep(1)
-        with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+        with frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
             endCase = frame.array
 
         startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
