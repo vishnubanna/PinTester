@@ -128,4 +128,4 @@ while (run < cycles):
         wiringpi.digitalWrite(6, 0)
         sleep(1)
         print("User ended premature")
-        return
+        
