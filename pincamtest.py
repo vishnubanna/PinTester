@@ -78,6 +78,12 @@ with PiCamera() as camera:
             with rawCapture as output:
                 camera.capture(output, 'bgr')
                 startCase = output.array
+                if rawCapture.seekable():
+                    rawCapture.seek(0)
+                    rawCapture.truncate()
+                else:
+                    rawCapture.truncate(0)
+
 
 
             for i in range(0, 2):
@@ -87,6 +93,11 @@ with PiCamera() as camera:
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
                 endCase = output1.array
+                if rawCapture1.seekable():
+                    rawCapture1.seek(0)
+                    rawCapture1.truncate()
+                else:
+                    rawCapture1.truncate(0)
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
@@ -125,8 +136,6 @@ with PiCamera() as camera:
                 camera.stop_preview()
                 break
 
-            rawCapture.truncate(0)
-            rawCapture1.truncate(0)
             run = run + 1
 
         except KeyboardInterrupt:
