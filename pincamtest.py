@@ -113,11 +113,16 @@ with PiCamera() as camera:
             delta = np.asarray(delta)
             print("im here")
 
-            roi1 = delta[0:(region), 2*lenreg:(3*lenreg)]
-            roi2 = delta[(region):(2*region), 2*lenreg:(3*lenreg)]
-            roi3 = delta[(2*region):(3*region), 2*lenreg:(3*lenreg)]
-            roi4 = delta[(3*region):(4*region), 2*lenreg:(3*lenreg)]
-            roi5 = delta[(4*region):(width), 2*lenreg:(3*lenreg)]
+            roi1 = delta[0:(region), (2*lenreg):(3*lenreg)]
+            print("im here")
+            roi2 = delta[(region):(2*region), (2*lenreg):(3*lenreg)]
+            print("im here")
+            roi3 = delta[(2*region):(3*region), (2*lenreg):(3*lenreg)]
+            print("im here")
+            roi4 = delta[(3*region):(4*region), (2*lenreg):(3*lenreg)]
+            print("im here")
+            roi5 = delta[(4*region):(width), (0):(length)]
+            print("im here")
 
             r1avg = np.average(np.asarray(roi1))
             r2avg = np.average(np.asarray(roi2))
