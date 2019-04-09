@@ -86,9 +86,9 @@ with PiCamera() as camera:
 
 
 
-            for i in range(0, 2):
+            for i in range(0, 5):
                 sleep(1)
-                print("i am recording {}".format(i))
+                print("i am recording {}".format(i+1))
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
