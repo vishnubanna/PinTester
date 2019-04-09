@@ -78,7 +78,7 @@ with PiCamera() as camera:
             with rawCapture as output:
                 camera.capture(output, 'bgr')
                 startCase = output.array
-                rawCapture.truncate(0)
+
 
             for i in range(0, 2):
                 sleep(1)
@@ -87,7 +87,6 @@ with PiCamera() as camera:
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
                 endCase = output1.array
-                rawCapture1.truncate(0)
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
@@ -117,7 +116,17 @@ with PiCamera() as camera:
             if failCounter > 5:
                 runs = cycles
                 print("failure ended premature")
+                wiringpi.digitalWrite(17, 0)
+                wiringpi.digitalWrite(27, 0)
+                wiringpi.digitalWrite(22, 0)
+                wiringpi.digitalWrite(5, 0)
+                wiringpi.digitalWrite(6, 0)
+                camers.stop_recording()
+                camera.stop_preview()
+                break
 
+            rawCapture.truncate(0)
+            rawCapture1.truncate(0)
             run = run + 1
 
         except KeyboardInterrupt:
