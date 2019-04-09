@@ -67,7 +67,7 @@ with PiCamera() as camera:
     roi4 = []
     roi5 = []
 
-    camera.start_recording(test.h264)
+    camera.start_recording('test.h264')
     camera.start_preview()
 
     while (run < cycles):
@@ -122,5 +122,5 @@ with PiCamera() as camera:
             sleep(1)
             camers.stop_recording()
             camera.stop_preview()
-
             print("User ended premature")
+            break
