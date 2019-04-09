@@ -55,8 +55,7 @@ if input == "y":
 with PiCamera() as camera:
     camera.resolution = (width,length)
     camera.framerate = 20
-    rawCapture = PiRGBArray(camera, size = (width,length))
-    rawCapture1 = PiRGBArray(camera, size = (width,length))
+
 
     startCase = np.empty((width,length,3), dtype = np.uint32)
     endCase = np.empty((width,length,3), dtype = np.uint32)
@@ -74,6 +73,8 @@ with PiCamera() as camera:
 
     while (run < cycles):
         try:
+            rawCapture = PiRGBArray(camera, size = (width,length))
+            rawCapture1 = PiRGBArray(camera, size = (width,length))
             with rawCapture as output:
                 camera.capture(output, 'bgr')
                 startCase = output.array
