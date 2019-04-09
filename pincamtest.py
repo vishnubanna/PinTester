@@ -67,8 +67,8 @@ if input == "y":
   print("running {} cycles on all pins".format(cycles))
 
 
-  while (run < cycles):
-      try:
+while (run < cycles):
+    try:
         with PiCamera() as pcam:
             pcam.capture(startCase, 'rgb')
             sleep(0.001)
