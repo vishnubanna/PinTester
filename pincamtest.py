@@ -84,7 +84,7 @@ with PiCamera() as camera:
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
-                endCase = output.array
+                endCase = output1.array
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
