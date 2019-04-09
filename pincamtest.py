@@ -70,15 +70,20 @@ with PiCamera() as camera:
     camera.start_recording('test.h264')
     camera.start_preview()
 
+
     while (run < cycles):
         try:
-            camera.capture(startCase, format = 'bgr', use_video_port = True)
+            with rawCapture as output:
+                startCase = camera.capture(output, 'rgb')
+                startCase = startCase.array
 
             for i in range(0, 5):
                 sleep(1)
                 print("i am recording {}".format(i))
 
-            camera.capture(endCase, format = 'bgr', use_video_port = True)
+            with rawCapture as output:
+                endCase = camera.capture(output, 'rgb')
+                endCase = endCase.array
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
