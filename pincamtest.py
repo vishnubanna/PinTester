@@ -78,7 +78,7 @@ with PiCamera() as camera:
                 camera.capture(output, 'bgr')
                 startCase = output.array
 
-            for i in range(0, 5):
+            for i in range(0, 2):
                 sleep(1)
                 print("i am recording {}".format(i))
 
@@ -90,7 +90,6 @@ with PiCamera() as camera:
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
 
             delta = cv2.subtract(startCase, endCase)
-            cv2.imshow('delta', delta)
 
             delta = np.asarray(delta)
 
