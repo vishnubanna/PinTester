@@ -158,7 +158,7 @@ with PiCamera() as camera:
             wiringpi.digitalWrite(5, 0)
             wiringpi.digitalWrite(6, 0)
             sleep(1)
-            camers.stop_recording()
+            camera.stop_recording()
             camera.stop_preview()
             print("User ended premature")
             break
