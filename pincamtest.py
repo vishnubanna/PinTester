@@ -69,9 +69,10 @@ if input == "y":
 
 while (run < cycles):
     try:
-        with frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+        for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
                 #camera.capture(startCase, 'rgb')
             startCase = frame.array
+            break
         sleep(1)
         camera.start_recording('test.mp4')
 
@@ -82,8 +83,9 @@ while (run < cycles):
 
         camera.stop_recording('test.mp4')
         sleep(1)
-        with frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+        for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
             endCase = frame.array
+            break 
 
         startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
         endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
