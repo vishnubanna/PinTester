@@ -132,7 +132,7 @@ with PiCamera() as camera:
                 wiringpi.digitalWrite(22, 0)
                 wiringpi.digitalWrite(5, 0)
                 wiringpi.digitalWrite(6, 0)
-                camers.stop_recording()
+                camera.stop_recording()
                 camera.stop_preview()
                 break
 
