@@ -5,7 +5,7 @@ import picamera
 import cv2
 import numpy as np
 import time
-import pycamera.array
+import picamera.array import PiRGBArray
 from picamera import PiCamera
 import os
 
@@ -128,4 +128,3 @@ while (run < cycles):
         wiringpi.digitalWrite(6, 0)
         sleep(1)
         print("User ended premature")
-        
