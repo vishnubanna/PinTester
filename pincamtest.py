@@ -69,58 +69,57 @@ if input == "y":
 
 while (run < cycles):
     try:
-        with PiCamera() as pcam:
-            with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+        with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
                 #pcam.capture(startCase, 'rgb')
-                startCase = frame.array
+            startCase = frame.array
+        sleep(1)
+        pcam.start_recording('test.mp4')
+
+        for i in range(0, 5):
             sleep(1)
-            pcam.start_recording('test.mp4')
-
-            for i in range(0, 5):
-                sleep(1)
-                print("i am recording {}".format(i))
+            print("i am recording {}".format(i))
 
 
-            pcam.stop_recording('test.mp4')
-            sleep(1)
-            with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
-                endCase = frame.array
+        pcam.stop_recording('test.mp4')
+        sleep(1)
+        with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+            endCase = frame.array
 
-            startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
-            endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
+        startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
+        endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
 
-            delta = cv2.subtract(startCase, endCase)
-            cv2.imshow('delta', delta)
+        delta = cv2.subtract(startCase, endCase)
+        cv2.imshow('delta', delta)
 
 
-            delta = np.asarray(delta)
+        delta = np.asarray(delta)
 
-            roi1 = delta[0:(region), 2*lenreg:(3*lenreg)]
-            roi2 = delta[(region):(2*region), 2*lenreg:(3*lenreg)]
-            roi3 = delta[(2*region):(3*region), 2*lenreg:(3*lenreg)]
-            roi4 = delta[(3*region):(4*region), 2*lenreg:(3*lenreg)]
-            roi5 = delta[(4*region):(width), 2*lenreg:(3*lenreg)]
+        roi1 = delta[0:(region), 2*lenreg:(3*lenreg)]
+        roi2 = delta[(region):(2*region), 2*lenreg:(3*lenreg)]
+        roi3 = delta[(2*region):(3*region), 2*lenreg:(3*lenreg)]
+        roi4 = delta[(3*region):(4*region), 2*lenreg:(3*lenreg)]
+        roi5 = delta[(4*region):(width), 2*lenreg:(3*lenreg)]
 
-            r1avg = np.average(np.asarray(roi1))
-            r2avg = np.average(np.asarray(roi2))
-            r3avg = np.average(np.asarray(roi3))
-            r4avg = np.average(np.asarray(roi4))
-            r5avg = np.average(np.asarray(roi5))
+        r1avg = np.average(np.asarray(roi1))
+        r2avg = np.average(np.asarray(roi2))
+        r3avg = np.average(np.asarray(roi3))
+        r4avg = np.average(np.asarray(roi4))
+        r5avg = np.average(np.asarray(roi5))
 
-            failCounter = pinfail(1, r1avg, failCounter, cycles)
-            failCounter = pinfail(2, r2avg, failCounter, cycles)
-            failCounter = pinfail(3, r3avg, failCounter, cycles)
-            failCounter = pinfail(4, r4avg, failCounter, cycles)
-            failCounter = pinfail(5, r5avg, failCounter, cycles)
+        failCounter = pinfail(1, r1avg, failCounter, cycles)
+        failCounter = pinfail(2, r2avg, failCounter, cycles)
+        failCounter = pinfail(3, r3avg, failCounter, cycles)
+        failCounter = pinfail(4, r4avg, failCounter, cycles)
+        failCounter = pinfail(5, r5avg, failCounter, cycles)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-            if failCounter > 5:
-                runs = cycles
-                print("failure ended premature")
+        if failCounter > 5:
+            runs = cycles
+            print("failure ended premature")
 
-            run = run + 1
+        run = run + 1
 
     except KeyboardInterrupt:
         run = cylces
