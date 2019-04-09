@@ -74,7 +74,7 @@ while (run < cycles):
             startCase = frame.array
             break
         sleep(1)
-        camera.start_recording('test.mp4')
+        camera.start_recording('test.h264')
 
         for i in range(0, 5):
             sleep(1)
@@ -85,7 +85,7 @@ while (run < cycles):
         sleep(1)
         for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
             endCase = frame.array
-            break 
+            break
 
         startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
         endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
