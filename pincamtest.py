@@ -5,7 +5,7 @@ import picamera
 import cv2
 import numpy as np
 import time
-import picamera.array import PiRGBArray
+from picamera.array import PiRGBArray
 from picamera import PiCamera
 import os
 
