@@ -70,8 +70,10 @@ if input == "y":
 while (run < cycles):
     try:
         with PiCamera() as pcam:
-            pcam.capture(startCase, 'rgb')
-            sleep(0.001)
+            with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+                #pcam.capture(startCase, 'rgb')
+                startCase = frame.array
+            sleep(1)
             pcam.start_recording('test.mp4')
 
             for i in range(0, 5):
@@ -80,8 +82,9 @@ while (run < cycles):
 
 
             pcam.stop_recording('test.mp4')
-            sleep(0.01)
-            pcam.capture(endCase, 'rgb')
+            sleep(1)
+            with frame in pcam.capture_continuous(rawCapture, format = 'bgr', use_video_port = True):
+                endCase = frame.array
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
