@@ -10,7 +10,7 @@ from picamera import PiCamera
 import os
 
 def pinfail(num, ravg, fails, cycles):
-    if (ravg > 1):
+    if (ravg > 10):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
         wiringpi.digitalWrite(17, 0)
@@ -77,6 +77,7 @@ with PiCamera() as camera:
             with rawCapture as output:
                 camera.capture(output, 'bgr')
                 startCase = output.array
+                rawCapture.truncate(0)
 
             for i in range(0, 2):
                 sleep(1)
@@ -85,6 +86,7 @@ with PiCamera() as camera:
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
                 endCase = output1.array
+                rawCapture1.truncate(0)
 
             startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
