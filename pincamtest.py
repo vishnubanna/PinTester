@@ -11,7 +11,10 @@ import os
 
 def pinfail(num, ravg, fails, cycles):
     print("pin {}: :avg {} ".format(num, ravg))
-    if (ravg > 1.1):
+    testnum = 1.1
+    if (fails > 6):
+        testnum = 1.7
+    if (ravg > testnum):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
         wiringpi.digitalWrite(17, 0)
