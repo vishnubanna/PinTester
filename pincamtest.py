@@ -168,7 +168,7 @@ with PiCamera() as camera:
 
             roi4 = delta[(3*region):(4*region), 0:(length)]
 
-            roi5 = delta[(4*region):(width), 0:(length)]
+            roi5 = delta[0:(length), (4*region):(width)]
 
 
             r1avg = np.average(roi1)
