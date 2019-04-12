@@ -119,7 +119,7 @@ with PiCamera() as camera:
             wiringpi.digitalWrite(6, 1)
             print("HIGH")
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(17, 0)
+            #wiringpi.digitalWrite(17, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
@@ -192,6 +192,7 @@ with PiCamera() as camera:
             # roi1 = [0,255,0]
 
             #cv2.imshow('gray', delta)
+            wiringpi.digitalWrite(17, 0)
 
             if failCounter > 10:
                 runs = cycles
