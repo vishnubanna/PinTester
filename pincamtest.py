@@ -68,7 +68,6 @@ with PiCamera() as camera:
     roi5 = []
 
     camera.start_recording('test.h264')
-    camera.start_preview()
 
 
     while (run < cycles):
@@ -109,9 +108,9 @@ with PiCamera() as camera:
             print("fine")
 
             delta = cv2.subtract(startCase, endCase)
+            cv2.imshow('gray', delta)
 
             delta = np.asarray(delta)
-
 
             roi1 = delta[0:(region), (2*lenreg):(3*lenreg)]
 
@@ -149,6 +148,18 @@ with PiCamera() as camera:
                 break
 
             run = run + 1
+            
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                run = cycles
+                wiringpi.digitalWrite(17, 0)
+                wiringpi.digitalWrite(27, 0)
+                wiringpi.digitalWrite(22, 0)
+                wiringpi.digitalWrite(5, 0)
+                wiringpi.digitalWrite(6, 0)
+                sleep(1)
+                camera.stop_recording()
+                print("User ended premature")
+                break
 
         except KeyboardInterrupt:
             run = cycles
