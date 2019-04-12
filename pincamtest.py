@@ -70,6 +70,8 @@ with PiCamera() as camera:
 
     camera.start_recording('test.h264')
 
+    camera.start_preview()
+
 
     while (run < cycles):
         try:
@@ -189,7 +191,7 @@ with PiCamera() as camera:
             # roi1 = [255,0,0]
             # roi1 = [0,255,0]
 
-            cv2.imshow('gray', delta)
+            #cv2.imshow('gray', delta)
 
             if failCounter > 10:
                 runs = cycles
