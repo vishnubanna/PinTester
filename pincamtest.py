@@ -124,11 +124,6 @@ with PiCamera() as camera:
 
             roi5 = delta[(4*region):(width), 0:(length)]
 
-            cv2.imshow('gray1', roi1)
-            cv2.imshow('gray2', roi2)
-            cv2.imshow('gray3', roi3)
-            cv2.imshow('gray4', roi4)
-            cv2.imshow('gray5', roi5)
 
             r1avg = np.average(roi1)
             r2avg = np.average(roi2)
