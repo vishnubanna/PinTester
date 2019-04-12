@@ -122,7 +122,7 @@ with PiCamera() as camera:
 
             roi4 = delta[(3*region):(4*region), 0:(length)]
 
-            roi5 = delta[(4*region):(width-1), 0:(length)]
+            roi5 = delta[(4*region):(width), 0:(length)]
 
             cv2.imshow('gray1', roi1)
             cv2.imshow('gray2', roi2)
@@ -134,7 +134,8 @@ with PiCamera() as camera:
             r2avg = np.average(roi2)
             r3avg = np.average(roi3)
             r4avg = np.average(roi4)
-            r5avg = np.nanmean(roi5)
+            roi5_masked = np.ma.masked_array(roi5, np.isnan(roi5))
+            r5avg = np.average(roi5_masked)
 
             failCounter = pinfail(1, r1avg, failCounter, cycles)
             failCounter = pinfail(2, r2avg, failCounter, cycles)
