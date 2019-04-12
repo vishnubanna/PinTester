@@ -110,6 +110,8 @@ with PiCamera() as camera:
 
             delta = cv2.subtract(startCase, endCase)
 
+            cv2.line(delta, (0, region), (length, region), (255,255,255), 10)
+
             cv2.imshow('gray', delta)
 
             delta = np.asarray(delta)
