@@ -9,6 +9,8 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import os
 
+ravages = []
+
 def pinfail(num, ravg, fails, cycles):
     print("pin {}: :avg {} ".format(num, ravg))
     testnum = 1.1
@@ -102,35 +104,35 @@ with PiCamera() as camera:
             wiringpi.digitalWrite(6, 1)
             print("HIGH")
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(17, 0)
+            wiringpi.digitalWrite(17, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
             #wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(5, 0)
+            #wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 0)
             print("LOW")
             sleep(2)
-            #wiringpi.digitalWrite(17, 1)
+            wiringpi.digitalWrite(17, 1)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 1)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(22, 1)
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(5, 1)
+            #wiringpi.digitalWrite(5, 1)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 1)
             print("HIGH")
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(17, 0)
+            wiringpi.digitalWrite(17, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
             #wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(5, 0)
+            #wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 0)
             print("LOW")
@@ -197,7 +199,7 @@ with PiCamera() as camera:
             # roi1 = [0,255,0]
 
             #cv2.imshow('gray', delta)
-            wiringpi.digitalWrite(17, 0)
+            wiringpi.digitalWrite(5, 0)
             wiringpi.digitalWrite(22, 0)
 
             if failCounter > 10:
