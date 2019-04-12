@@ -138,7 +138,10 @@ with PiCamera() as camera:
 
             delta = cv2.subtract(startCase, endCase)
 
-            cv2.line(delta, (length, region), (0, region), (255,255,255), 10)
+            roi1 = [255,255,255]
+            roi2 = [0,0,255]
+            roi1 = [255,0,0]
+            roi1 = [0,255,0]
 
             cv2.imshow('gray', delta)
 
