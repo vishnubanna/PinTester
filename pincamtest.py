@@ -34,7 +34,7 @@ width = 640
 length = 480
 cycles = 1000
 
-TIMECONSTANT = 0.004
+TIMECONSTANT = 0.5
 
 region = width/5
 lenreg = length/4
@@ -84,8 +84,53 @@ with PiCamera() as camera:
                 else:
                     rawCapture.truncate(0)
 
+            wiringpi.digitalWrite(17, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(27, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(22, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(5, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(6, 1)
+            print("HIGH")
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(17, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(27, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(22, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(5, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(6, 0)
+            print("LOW")
+            sleep(2)
+            wiringpi.digitalWrite(17, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(27, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(22, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(5, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(6, 1)
+            print("HIGH")
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(17, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(27, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(22, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(5, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(6, 0)
+            print("LOW")
+            sleep(TIMECONSTANT)
 
 
+            '''
             for i in range(0, 5):
                 sleep(1)
                 print("i am recording {}".format(i+1))
@@ -93,6 +138,7 @@ with PiCamera() as camera:
                 sleep(TIMECONSTANT)
                 wiringpi.digitalWrite(17, 0)
                 sleep(TIMECONSTANT)
+            '''
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
@@ -136,12 +182,12 @@ with PiCamera() as camera:
             failCounter = pinfail(4, r4avg, failCounter, cycles)
             failCounter = pinfail(5, r5avg, failCounter, cycles)
 
-            delta = cv2.subtract(startCase, endCase)
-
-            roi1 = [255,255,255]
-            roi2 = [0,0,255]
-            roi1 = [255,0,0]
-            roi1 = [0,255,0]
+            # delta = cv2.subtract(startCase, endCase)
+            #
+            # roi1 = [255,255,255]
+            # roi2 = [0,0,255]
+            # roi1 = [255,0,0]
+            # roi1 = [0,255,0]
 
             cv2.imshow('gray', delta)
 
