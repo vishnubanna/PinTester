@@ -77,14 +77,15 @@ with PiCamera() as camera:
         try:
             rawCapture = PiRGBArray(camera, size = (width,length))
             rawCapture1 = PiRGBArray(camera, size = (width,length))
-            with rawCapture as output:
-                camera.capture(output, 'bgr')
-                startCase = output.array
-                if rawCapture.seekable():
-                    rawCapture.seek(0)
-                    rawCapture.truncate()
-                else:
-                    rawCapture.truncate(0)
+            if (failCounter  < 6):
+                with rawCapture as output:
+                    camera.capture(output, 'bgr')
+                    startCase = output.array
+                    if rawCapture.seekable():
+                        rawCapture.seek(0)
+                        rawCapture.truncate()
+                    else:
+                        rawCapture.truncate(0)
 
             wiringpi.digitalWrite(17, 1)
             sleep(TIMECONSTANT)
