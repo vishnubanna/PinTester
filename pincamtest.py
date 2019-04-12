@@ -10,6 +10,7 @@ from picamera import PiCamera
 import os
 
 def pinfail(num, ravg, fails, cycles):
+    print("pin {}: :avg {} ".format(num, ravg))
     if (ravg > 10):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
