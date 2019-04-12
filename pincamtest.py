@@ -108,19 +108,20 @@ with PiCamera() as camera:
             print("fine")
 
             delta = cv2.subtract(startCase, endCase)
+
             cv2.imshow('gray', delta)
 
             delta = np.asarray(delta)
 
-            roi1 = delta[0:(region), (2*lenreg):(3*lenreg)]
+            roi1 = delta[0:(region), 0:(length)]
 
-            roi2 = delta[(region):(2*region), (2*lenreg):(3*lenreg)]
+            roi2 = delta[(region):(2*region), 0:(length)]
 
-            roi3 = delta[(2*region):(3*region), (2*lenreg):(3*lenreg)]
+            roi3 = delta[(2*region):(3*region), 0:(length)]
 
-            roi4 = delta[(3*region):(4*region), (2*lenreg):(3*lenreg)]
+            roi4 = delta[(3*region):(4*region), 0:(length)]
 
-            roi5 = delta[(4*region):(width), (2*lenreg):(3*lenreg)]
+            roi5 = delta[(4*region):(width), 0:(length)]
 
 
             r1avg = np.average(roi1)
@@ -148,7 +149,7 @@ with PiCamera() as camera:
                 break
 
             run = run + 1
-            
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 run = cycles
                 wiringpi.digitalWrite(17, 0)
