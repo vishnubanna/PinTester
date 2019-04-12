@@ -162,7 +162,7 @@ with PiCamera() as camera:
 
             roi1 = delta[ 0:(length), 0:(region)]
 
-            roi2 = delta[ 0:(length).(region):(2*region)]
+            roi2 = delta[ 0:(length),(region):(2*region)]
 
             roi3 = delta[0:(length), (2*region):(3*region)]
 
