@@ -13,7 +13,7 @@ def pinfail(num, ravg, fails, cycles):
     print("pin {}: :avg {} ".format(num, ravg))
     testnum = 1.1
     if (fails > 6):
-        testnum = 1.7
+        testnum = 1.2
     if (ravg > testnum):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
