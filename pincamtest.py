@@ -110,10 +110,6 @@ with PiCamera() as camera:
 
             delta = cv2.subtract(startCase, endCase)
 
-            cv2.line(delta, (0, region), (length, region), (255,255,255), 10)
-
-            cv2.imshow('gray', delta)
-
             delta = np.asarray(delta)
 
             roi1 = delta[0:(region), 0:(length)]
@@ -139,6 +135,12 @@ with PiCamera() as camera:
             failCounter = pinfail(3, r3avg, failCounter, cycles)
             failCounter = pinfail(4, r4avg, failCounter, cycles)
             failCounter = pinfail(5, r5avg, failCounter, cycles)
+
+            delta = cv2.subtract(startCase, endCase)
+            
+            cv2.line(delta, (0, region), (length, region), (255,255,255), 10)
+
+            cv2.imshow('gray', delta)
 
             if failCounter > 10:
                 runs = cycles
