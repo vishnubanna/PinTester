@@ -11,7 +11,7 @@ import os
 
 def pinfail(num, ravg, fails, cycles):
     print("pin {}: :avg {} ".format(num, ravg))
-    if (ravg > 10):
+    if (ravg > 1.5):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
         wiringpi.digitalWrite(17, 0)
@@ -101,7 +101,7 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(22, 0)
+            #wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
@@ -123,7 +123,7 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(22, 0)
+            #wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
@@ -193,6 +193,7 @@ with PiCamera() as camera:
 
             #cv2.imshow('gray', delta)
             wiringpi.digitalWrite(17, 0)
+            wiringpi.digitalWrite(22, 0)
 
             if failCounter > 10:
                 runs = cycles
