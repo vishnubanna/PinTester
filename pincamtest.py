@@ -86,6 +86,7 @@ with PiCamera() as camera:
                         rawCapture.truncate()
                     else:
                         rawCapture.truncate(0)
+                startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
 
             wiringpi.digitalWrite(17, 1)
             sleep(TIMECONSTANT)
@@ -152,7 +153,7 @@ with PiCamera() as camera:
                 else:
                     rawCapture1.truncate(0)
 
-            startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
+            #startCase = cv2.cvtColor(startCase, cv2.COLOR_BGR2GRAY)
             print("fine")
             endCase = cv2.cvtColor(endCase, cv2.COLOR_BGR2GRAY)
             print("fine")
