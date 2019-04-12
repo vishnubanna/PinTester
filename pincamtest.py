@@ -160,13 +160,13 @@ with PiCamera() as camera:
 
             delta = np.asarray(delta)
 
-            roi1 = delta[0:(region), 0:(length)]
+            roi1 = delta[ 0:(length), 0:(region)]
 
-            roi2 = delta[(region):(2*region), 0:(length)]
+            roi2 = delta[ 0:(length).(region):(2*region)]
 
-            roi3 = delta[(2*region):(3*region), 0:(length)]
+            roi3 = delta[0:(length), (2*region):(3*region)]
 
-            roi4 = delta[(3*region):(4*region), 0:(length)]
+            roi4 = delta[0:(length), (3*region):(4*region)]
 
             roi5 = delta[0:(length), (4*region):(width)]
 
