@@ -37,7 +37,7 @@ cycles = 1000
 TIMECONSTANT = 0.5
 
 region = width/5
-lenreg = length/4
+lenreg = length/2
 failCounter = 0
 
 print("running {} cycles on all pins".format(cycles))
@@ -160,15 +160,15 @@ with PiCamera() as camera:
 
             delta = np.asarray(delta)
 
-            roi1 = delta[ 0:(length), 0:(region)]
+            roi1 = delta[ lenreg:(length), 0:(region)]
 
-            roi2 = delta[ 0:(length),(region):(2*region)]
+            roi2 = delta[lenreg:(length),(region):(2*region)]
 
-            roi3 = delta[0:(length), (2*region):(3*region)]
+            roi3 = delta[lenreg:(length), (2*region):(3*region)]
 
-            roi4 = delta[0:(length), (3*region):(4*region)]
+            roi4 = delta[lenreg:(length), (3*region):(4*region)]
 
-            roi5 = delta[0:(length), (4*region):(width)]
+            roi5 = delta[lenreg:(length), (4*region):(width)]
 
 
             r1avg = np.average(roi1)
