@@ -37,7 +37,7 @@ width = 640
 length = 480
 cycles = 1000
 
-TIMECONSTANT = 0.5
+TIMECONSTANT = 0.01
 
 region = width/5
 lenreg = length/2
