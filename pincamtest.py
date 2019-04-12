@@ -129,7 +129,7 @@ with PiCamera() as camera:
             r2avg = np.average(roi2)
             r3avg = np.average(roi3)
             r4avg = np.average(roi4)
-            r5avg = np.average(roi5)
+            r5avg = np.nanmean(roi5)
 
             failCounter = pinfail(1, r1avg, failCounter, cycles)
             failCounter = pinfail(2, r2avg, failCounter, cycles)
