@@ -137,8 +137,8 @@ with PiCamera() as camera:
             failCounter = pinfail(5, r5avg, failCounter, cycles)
 
             delta = cv2.subtract(startCase, endCase)
-            
-            cv2.line(delta, (0, region), (length, region), (255,255,255), 10)
+
+            cv2.line(delta, (length, region), (0, region), (255,255,255), 10)
 
             cv2.imshow('gray', delta)
 
