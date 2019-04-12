@@ -21,7 +21,8 @@ for frame in camera.capture_continuous(rawCapture, format = 'bgr', use_video_por
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     try:
-        delta = cv2.subtract(endCase, image)
+        delta = image
+        #delta = cv2.subtract(endCase, image)
     except:
         delta = delta
         print('error')
