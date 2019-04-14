@@ -155,6 +155,7 @@ with PiCamera() as camera:
             wiringpi.digitalWrite(randpin, 1)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(randpin1, 1)
+            sleep(1)
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
