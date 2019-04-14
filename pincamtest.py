@@ -11,12 +11,11 @@ import os
 from random import *
 
 
-
-def pinfail(num, ravg, fails, cycles):
+def pinfail(num, ravg, fails, cycles, ravagss):
     print("pin {}: :avg {} ".format(num, ravg))
     testnum = 1.1
     if (fails > 6):
-        testnum = 1.2
+        testnum = 0.6 + min(ravagss)
     if (ravg > testnum):
         print("pin in region {} has possibly  failed, region avg: {}".format(num, ravg))
         fails = fails + 1
@@ -46,8 +45,10 @@ randpin = pins[randint(1,5)-1]
 randpin1 = pins[randint(1,5)-1]
 
 region = width/5
-lenreg = length/2
+lenreg = length/3
 failCounter = 0
+
+
 
 print("running {} cycles on all pins".format(cycles))
 
@@ -175,15 +176,15 @@ with PiCamera() as camera:
 
             delta = np.asarray(delta)
 
-            roi1 = delta[ lenreg:(length), 0:(region)]
+            roi1 = delta[ 2*lenreg:(length), 0:(region)]
 
-            roi2 = delta[lenreg:(length),(region):(2*region)]
+            roi2 = delta[2*lenreg:(length),(region):(2*region)]
 
-            roi3 = delta[lenreg:(length), (2*region):(3*region)]
+            roi3 = delta[2*lenreg:(length), (2*region):(3*region)]
 
-            roi4 = delta[lenreg:(length), (3*region):(4*region)]
+            roi4 = delta[2*lenreg:(length), (3*region):(4*region)]
 
-            roi5 = delta[lenreg:(length), (4*region):(width)]
+            roi5 = delta[2*lenreg:(length), (4*region):(width)]
 
 
             r1avg = np.average(roi1)
@@ -193,11 +194,14 @@ with PiCamera() as camera:
             roi5_masked = np.ma.masked_array(roi5, np.isnan(roi5))
             r5avg = np.average(roi5_masked)
 
-            failCounter = pinfail(1, r1avg, failCounter, cycles)
-            failCounter = pinfail(2, r2avg, failCounter, cycles)
-            failCounter = pinfail(3, r3avg, failCounter, cycles)
-            failCounter = pinfail(4, r4avg, failCounter, cycles)
-            failCounter = pinfail(5, r5avg, failCounter, cycles)
+            ravags = [r1avg, r2avg, r3avg, r4avg, r5avg]
+
+
+            failCounter = pinfail(1, r1avg, failCounter, cycles, ravags)
+            failCounter = pinfail(2, r2avg, failCounter, cycles, ravags)
+            failCounter = pinfail(3, r3avg, failCounter, cycles, ravags)
+            failCounter = pinfail(4, r4avg, failCounter, cycles, ravags)
+            failCounter = pinfail(5, r5avg, failCounter, cycles, ravags)
 
             # delta = cv2.subtract(startCase, endCase)
             #
