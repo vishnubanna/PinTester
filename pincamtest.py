@@ -8,8 +8,9 @@ import time
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import os
+from random import *
 
-ravages = []
+
 
 def pinfail(num, ravg, fails, cycles):
     print("pin {}: :avg {} ".format(num, ravg))
@@ -40,6 +41,9 @@ length = 480
 cycles = 1000
 
 TIMECONSTANT = 0.01
+pins = [17,27,22,5,6]
+randpin = pins[rand(1,5)-1]
+randpin1 = pins[rand(1,5)-1]
 
 region = width/5
 lenreg = length/2
@@ -108,9 +112,9 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(22, 0)
+            wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(5, 0)
+            wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 0)
             print("LOW")
@@ -121,21 +125,21 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(22, 1)
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(5, 1)
+            wiringpi.digitalWrite(5, 1)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 1)
-            print("HIGH")
+            #print("HIGH")
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(17, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(27, 0)
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(22, 0)
+            wiringpi.digitalWrite(22, 0)
             sleep(TIMECONSTANT)
-            #wiringpi.digitalWrite(5, 0)
+            wiringpi.digitalWrite(5, 0)
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(6, 0)
-            print("LOW")
+            #print("LOW")
             sleep(TIMECONSTANT)
 
 
@@ -148,6 +152,9 @@ with PiCamera() as camera:
                 wiringpi.digitalWrite(17, 0)
                 sleep(TIMECONSTANT)
             '''
+            wiringpi.digitalWrite(randpin, 1)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(randpin1, 1)
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
@@ -199,8 +206,9 @@ with PiCamera() as camera:
             # roi1 = [0,255,0]
 
             #cv2.imshow('gray', delta)
-            wiringpi.digitalWrite(5, 0)
-            wiringpi.digitalWrite(22, 0)
+            wiringpi.digitalWrite(randpin, 0)
+            sleep(TIMECONSTANT)
+            wiringpi.digitalWrite(randpin1, 0)
 
             if failCounter > 10:
                 runs = cycles
