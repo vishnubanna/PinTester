@@ -211,6 +211,9 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(randpin1, 0)
 
+            randpin = pins[randint(1,5)-1]
+            randpin1 = pins[randint(1,5)-1]
+
             if failCounter > 10:
                 runs = cycles
                 print("failure ended premature")
