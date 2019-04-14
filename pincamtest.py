@@ -41,8 +41,10 @@ cycles = 1000
 
 TIMECONSTANT = 0.01
 pins = [17,27,22,5,6]
-randpin = pins[randint(1,5)-1]
-randpin1 = pins[randint(1,5)-1]
+rando = randint(1,5)
+rando1 = randint(1,5)
+randpin = pins[rando-1]
+randpin1 = pins[rando1-1]
 
 region = width/5
 lenreg = length/3
@@ -160,8 +162,8 @@ with PiCamera() as camera:
             wiringpi.digitalWrite(randpin1, 1)
             sleep(1)
 
-            print("setfail: {}".format(randpin))
-            print("setfail: {}".format(randpin1))
+            print("setfail: {}".format(rando))
+            print("setfail: {}".format(rand01))
 
             with rawCapture1 as output1:
                 camera.capture(output1, 'bgr')
@@ -220,8 +222,10 @@ with PiCamera() as camera:
             sleep(TIMECONSTANT)
             wiringpi.digitalWrite(randpin1, 0)
 
-            randpin = pins[randint(1,5)-1]
-            randpin1 = pins[randint(1,5)-1]
+            rando = randint(1,5)
+            rando1 = randint(1,5)
+            randpin = pins[rando-1]
+            randpin1 = pins[rando1-1]
 
             if failCounter > 10:
                 runs = cycles
