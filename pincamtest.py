@@ -204,11 +204,11 @@ with PiCamera() as camera:
             ravags = [r1avg, r2avg, r3avg, r4avg, r5avg]
 
 
-            failCounter = pinfail(1, r1avg, failCounter, cycles, ravags)
-            failCounter = pinfail(2, r2avg, failCounter, cycles, ravags)
+            failCounter = pinfail(5, r1avg, failCounter, cycles, ravags)
+            failCounter = pinfail(4, r2avg, failCounter, cycles, ravags)
             failCounter = pinfail(3, r3avg, failCounter, cycles, ravags)
-            failCounter = pinfail(4, r4avg, failCounter, cycles, ravags)
-            failCounter = pinfail(5, r5avg, failCounter, cycles, ravags)
+            failCounter = pinfail(2, r4avg, failCounter, cycles, ravags)
+            failCounter = pinfail(1, r5avg, failCounter, cycles, ravags)
 
             # delta = cv2.subtract(startCase, endCase)
             #
