@@ -42,8 +42,8 @@ cycles = 1000
 
 TIMECONSTANT = 0.01
 pins = [17,27,22,5,6]
-randpin = pins[rand(1,5)-1]
-randpin1 = pins[rand(1,5)-1]
+randpin = pins[randint(1,5)-1]
+randpin1 = pins[randint(1,5)-1]
 
 region = width/5
 lenreg = length/2
