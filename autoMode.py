@@ -5,7 +5,7 @@ import picamera
 import cv2
 import numpy as np
 import time
-import pycamera.array
+import picamera.array
 from picamera import PiCamera
 
 def automatic():
