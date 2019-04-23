@@ -14,7 +14,7 @@ def automatic():
     wiringpi.pinMode(6, 1)
 
     TIMECONSTANT = 0.004
-    cylces = 10000
+    cycles = 10000
     input = raw_input("run y/n")
     if input == "y":
         run = 0
@@ -25,7 +25,7 @@ def automatic():
         wiringpi.digitalWrite(6, 0)
         print("running {} cycles on all pins".format(cycles))
 
-        while (run < cylces):
+        while (run < cycles):
             try:
                 wiringpi.digitalWrite(17, 1)
                 sleep(TIMECONSTANT)
@@ -72,7 +72,7 @@ def automatic():
                 run = run + 1
 
             except KeyboardInterrupt:
-                run = cylces
+                run = cycles
                 wiringpi.digitalWrite(17, 0)
                 wiringpi.digitalWrite(27, 0)
                 wiringpi.digitalWrite(22, 0)
