@@ -14,6 +14,7 @@ def automatic():
     wiringpi.pinMode(6, 1)
 
     TIMECONSTANT = 0.004
+    cylces = 10000
     input = raw_input("run y/n")
     if input == "y":
         run = 0
@@ -82,4 +83,4 @@ def automatic():
     return
 
 if __name__ == "__main__":
-    automatic() 
+    automatic()
