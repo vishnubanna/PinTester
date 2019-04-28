@@ -38,7 +38,7 @@ def manual():
             pin = int(pin)
         except:
             pin =input("which pin raised or lowered?")
-        if (count <= 5) and (pin >= 1 and pin <= 5):
+        if (count <= 5) and (pin >= 1 and pin < 6):
             if rised[pin-1] == pin:
                 count -= 1
                 lower(pin-1, pin-1)
@@ -69,7 +69,7 @@ def rise(sol, res):
     wp.digitalWrite(solonoid[sol], 1)
     time.sleep(0.0002)
     wp.digitalWrite(resis[res], 0)
-    time.sleep(0.02)
+    time.sleep(0.2)
     wp.digitalWrite(solonoid[sol], 0)
     time.sleep(0.0002)
     wp.digitalWrite(resis[res], 1)
