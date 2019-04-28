@@ -67,11 +67,11 @@ def rise(sol, res):
     global TIME_INIT
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.00002)
+    time.sleep(0.0002)
     wp.digitalWrite(resis[res], 0)
     time.sleep(0.02)
     wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.00002)
+    time.sleep(0.0002)
     wp.digitalWrite(resis[res], 1)
     return
 
@@ -79,11 +79,11 @@ def lower(sol, res):
     global TIME_INIT
     TIME_INIT = time.clock()
     wp.digitalWrite(solonoid[sol], 1)
-    time.sleep(0.00002)
+    time.sleep(0.0002)
     wp.digitalWrite(resis[res], 0)
     time.sleep(0.02)
     wp.digitalWrite(solonoid[sol], 0)
-    time.sleep(0.00002)
+    time.sleep(0.0002)
     wp.digitalWrite(resis[res], 1)
     return
 
