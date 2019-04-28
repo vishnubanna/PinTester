@@ -88,8 +88,6 @@ def automatic():
                 sleep(timeLen)
             except KeyboardInterrupt:
                 run = cycles
-                camera.stop_recording()
-                camera.stop_preview()
                 wiringpi.digitalWrite(17, 0)
                 wiringpi.digitalWrite(27, 0)
                 wiringpi.digitalWrite(22, 0)

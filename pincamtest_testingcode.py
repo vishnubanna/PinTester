@@ -81,7 +81,6 @@ with PiCamera() as camera:
     roi5 = []
 
     camera.start_recording('test.h264')
-
     camera.start_preview()
 
 
