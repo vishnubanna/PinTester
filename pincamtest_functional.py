@@ -155,10 +155,10 @@ with PiCamera() as camera:
             '''
 
 
-            wiringpi.digitalWrite(randpin, 1)
-            sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(randpin1, 1)
-            sleep(1)
+            # wiringpi.digitalWrite(randpin, 1)
+            # sleep(TIMECONSTANT)
+            # wiringpi.digitalWrite(randpin1, 1)
+            # sleep(1)
 
             print("setfail: {}".format(rando))
             print("setfail: {}".format(rando1))
