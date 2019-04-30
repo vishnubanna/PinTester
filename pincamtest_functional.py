@@ -216,9 +216,9 @@ with PiCamera() as camera:
             # roi1 = [0,255,0]
 
             #cv2.imshow('gray', delta)
-            wiringpi.digitalWrite(randpin, 0)
-            sleep(TIMECONSTANT)
-            wiringpi.digitalWrite(randpin1, 0)
+            # wiringpi.digitalWrite(randpin, 0)
+            # sleep(TIMECONSTANT)
+            # wiringpi.digitalWrite(randpin1, 0)
 
             # rando = randint(1,5)
             # rando1 = randint(1,5)
